@@ -1,0 +1,12 @@
+
+public void printResult() {
+        if (clickCount == 3) {
+                if (isWrongBoxClicked) {
+                        resultLabel.setText("Lost!");
+                        resultLabel.setTextFill(Color.RED);
+                } else {
+                        resultLabel.setText("Winner!");
+                        resultLabel.setTextFill(Color.GREEN);
+                }       
+        }               
+}
