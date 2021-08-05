@@ -1,0 +1,177 @@
+//Nabil Rizwaan Alias 20000012
+//Surendren Munusamy 17002281
+
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+
+public class ColorGame extends Application {
+
+        //Declaring variables
+        GridPane gridPane;                                                              //game container Grid
+        Button restartButton, quitButton;                               //Buttons for Restart and Quit
+        Label resultLabel;                                                              //Label to display the result on top of the grid
+        int clickCount = 0;                                                             //Holds the user clicks count
+        boolean isWrongBoxClicked = false;                              //flag initialized with false. used to check whether user clicked any wrong box or not
+        
+        @Override
+        public void start(Stage stage) {
+                stage.setTitle("Color Game");                           //Sets the title of the game
+
+                gridPane = new GridPane();                                      //Initializes the grid
+                gridPane.setAlignment(Pos.CENTER);                      //setting properties for grid
+                gridPane.setHgap(10);
+                gridPane.setVgap(10);
+                gridPane.setPadding(new Insets(25, 25, 25, 25));
+                
+                resultLabel = new Label();                                      //Initializes the result label
+                gridPane.add(resultLabel, 0, 0);                        //Attaching the result to grid
+
+                Rectangle box1 = new Rectangle(100, 120);       //Creating 6 boxes
+                Rectangle box2 = new Rectangle(100, 120);
+                Rectangle box3 = new Rectangle(100, 120);
+                Rectangle box4 = new Rectangle(100, 120);
+                Rectangle box5 = new Rectangle(100, 120);
+                Rectangle box6 = new Rectangle(100, 120);
+                
+                box1.setFill(Color.GRAY);                                       //Filling the boxes with Gray color
+                box2.setFill(Color.GRAY);
+                box3.setFill(Color.GRAY);
+                box4.setFill(Color.GRAY);
+                box5.setFill(Color.GRAY);
+                box6.setFill(Color.GRAY);
+                
+                gridPane.add(box1, 0, 1);                                       //Attaching the boxes to the grid
+                gridPane.add(box2, 1, 1);
+                gridPane.add(box3, 0, 2);
+                gridPane.add(box4, 1, 2);
+                gridPane.add(box5, 0, 3);
+                gridPane.add(box6, 1, 3);
+                
+                restartButton = new Button("Restart");          //Creating the buttons
+                restartButton.setPrefWidth(100);                        
+                quitButton = new Button("Quit");
+                quitButton.setPrefWidth(100);
+                
+                gridPane.add(restartButton, 0, 4);                      //Attaching the buttons to grid
+                gridPane.add(quitButton, 1, 4);
+                
+                //Closes the application
+                quitButton.setOnAction(actionEvent -> {
+                        System.exit(0);
+                });
+                
+                //Restarts the game
+                restartButton.setOnAction(actionEvent -> {
+                        clickCount = 0;                                                 //Resets the click count for a fresh game 
+                        start(stage);                                                   //Starts the game freshly
+                });
+                
+                //Box 1 click event
+                box1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                                if (clickCount < 3) {                                //Checks whether user clicked 3 boxes or not
+                                        box1.setFill(Color.BLUE);               //If click count is less than 3, it will change the box color from Gray to Blue
+                                        clickCount++;                                   //And increments the count by 1
+                                        printResult();                                  //Prints the result
+                                }
+                        }                       
+                });
+                
+                //Box 2 click event
+                box2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                                if (clickCount < 3) {
+                                        isWrongBoxClicked = true;               //Setting isWrongBoxClicked to true as it is not a blue box
+                                        box2.setFill(Color.RED);
+                                        clickCount++;
+                                        printResult();
+                                }                               
+                        }                       
+                });
+                
+                //Box 3 click event
+                box3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                                if (clickCount < 3) {
+                                        isWrongBoxClicked = true;               //Setting isWrongBoxClicked to true as it is not a blue box
+                                        box3.setFill(Color.GREEN);
+                                        clickCount++;
+                                        printResult();
+                                }               
+                        }                       
+                });
+
+                //Box 4 click event
+                box4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                                if (clickCount < 3) {
+                                        box4.setFill(Color.BLUE);
+                                        clickCount++;
+                                        printResult();
+                                }                               
+                        }                       
+                });
+                
+                //Box 5 click event
+                box5.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {                          
+                                if (clickCount < 3) {
+                                        box5.setFill(Color.BLUE);
+                                        clickCount++;
+                                        printResult();
+                                }
+                        }                       
+                });
+                
+                //Box 6 click event
+                box6.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                                if (clickCount < 3) {
+                                        isWrongBoxClicked = true;               //Setting isWrongBoxClicked to true as it is not a blue box
+                                        box6.setFill(Color.YELLOW);
+                                        clickCount++;
+                                        printResult();
+                                }                       
+                        }                       
+                });
+
+                Scene scene = new Scene(gridPane, 1200, 600);
+                stage.setScene(scene);
+
+                stage.show();
+        }
+
+        //Prints the result after 3 clicks
+        protected void printResult() {
+                if (clickCount == 3) {                                                                  //Will check if user clicked 3 boxes or not
+                        if (isWrongBoxClicked) {                                                        //if 3 clicked, checks whether user clicked any wrong box (non Blue box)
+                                resultLabel.setText("Lost!");                                   //if wrong box clicked by user, will print Lost in result label
+                                resultLabel.setTextFill(Color.RED);                             //Sets the color to Red
+                        } else {
+                                resultLabel.setText("Winner!");                                 //Else will print Winner
+                                resultLabel.setTextFill(Color.GREEN);                   //Sets the color to Green
+                        }       
+                }               
+        }
+
+        // Executon starts from here
+        public static void main(String[] args) {
+                launch(args);
+        }
+}
