@@ -1,0 +1,98 @@
+//Nabil Rizwaan Alias 20000012
+//Surendren Munusamy 17002281
+
+package main;
+
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+
+public class Controller extends Main{
+	
+	 @Override
+     public void start(Stage stage) throws Exception {
+		 
+		 
+		   //Box 1 click event
+         box1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                 @Override
+                 public void handle(MouseEvent event) {
+                         if (clickCount < 3) {
+                                 box1.setFill(Color.BLUE);
+                                 clickCount++;
+                                 printResult();
+                         }
+                 }                       
+         });
+         
+         //Box 2 click event
+         box2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                 @Override
+                 public void handle(MouseEvent event) {
+                         if (clickCount < 3) {
+                                 isWrongBoxClicked = true;
+                                 box2.setFill(Color.RED);
+                                 clickCount++;
+                                 printResult();
+                         }                               
+                 }                       
+         });
+         
+         //Box 3 click event
+         box3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                 @Override
+                 public void handle(MouseEvent event) {
+                         if (clickCount < 3) {
+                                 isWrongBoxClicked = true;
+                                 box3.setFill(Color.GREEN);
+                                 clickCount++;
+                                 printResult();
+                         }               
+                 }                       
+         });
+
+         //Box 4 click event
+         box4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                 @Override
+                 public void handle(MouseEvent event) {
+                         if (clickCount < 3) {
+                                 box4.setFill(Color.BLUE);
+                                 clickCount++;
+                                 printResult();
+                         }                               
+                 }                       
+         });
+         
+         //Box 5 click event
+         box5.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                 @Override
+                 public void handle(MouseEvent event) {                          
+                         if (clickCount < 3) {
+                                 box5.setFill(Color.BLUE);
+                                 clickCount++;
+                                 printResult();
+                         }
+                 }                       
+         });
+         
+         //Box 6 click event
+         box6.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                 @Override
+                 public void handle(MouseEvent event) {
+                         if (clickCount < 3) {
+                                 isWrongBoxClicked = true;
+                                 box6.setFill(Color.YELLOW);
+                                 clickCount++;
+                                 printResult();
+                         }                       
+                 }                       
+         });
+         
+         
+         
+         
+	 }
+
+}
